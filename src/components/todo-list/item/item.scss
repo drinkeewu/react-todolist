@@ -1,0 +1,50 @@
+$item-bg:#FAFBFC;
+$item-check-bg: #2185FF;
+$item-border:#F4F5F7;
+$check-box-border: #B4D5FF;
+
+.todo-list-item {
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  background-color: $item-bg;
+  border-bottom: 1px solid $item-border;
+  color: #4F5E79;
+  line-height: 50px;
+  height: 50px;
+
+  &.checked {
+    background-color: #fff;
+  }
+
+  .item-check-dot {
+    cursor: pointer;
+    margin-right: 15px;
+    width: 24px;
+    height: 24px;
+    border-radius: 100%;
+    border: 2px solid $check-box-border;
+
+    &.checked {
+      background-color: $item-check-bg;
+    }
+  }
+
+  .item-content {
+    &.done {
+      color: #DCDFE6;
+    }
+
+    &.editing {
+      padding-left: 43px;
+      //输入框
+      .item-input {
+        background: $item-bg;
+        border: none;
+        font-size: 16px;
+        outline: none;
+      }
+    }
+  }
+
+}
