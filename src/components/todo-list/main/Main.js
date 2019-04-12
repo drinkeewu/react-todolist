@@ -12,14 +12,19 @@ class TodoList extends Component {
     this.state = {
       todoList: this.props.list
     };
+
+    this.handleAddItem = this.handleAddItem.bind(this);
   }
 
   handleAddItem() {
-    this.setState(state => ({
-      todoList: state.todoList.push({
-        name: ''
-      })
-    }))
+    const {todoList} = this.state;
+    todoList.push({
+      name: '',
+      editing: false
+    })    
+    this.setState({
+      todoList: todoList
+    })
   }
 
   render() {
@@ -27,7 +32,7 @@ class TodoList extends Component {
       <div className="todo-list-wrapper">
         <Header />
         <List list={this.state.todoList}/>
-        <AddButton />
+        <AddButton onClick={this.handleAddItem} />
       </div>
     );
   }

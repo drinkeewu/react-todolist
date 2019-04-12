@@ -10,10 +10,17 @@ class List extends Component {
       list: this.props.list
     };
 
+    this.itemOnBlur = this.itemOnBlur.bind(this)
+
   }
 
-  handleDoubleClick() {
-    console.log('double click')
+  
+  itemOnBlur(e, index) {
+    const { list } = this.state;
+    list[index].editing = false;
+    this.setState({
+      list
+    })
   }
 
   render() {
@@ -21,11 +28,14 @@ class List extends Component {
       <div className="todo-list">
       {
         this.state.list.map((item, index) => {
-          return <Item 
-            key={`item-${index}`}
-            data={item.name}
-          >
-          </Item>
+          return (
+              <Item 
+                key={`item-${index}`}
+                data={Object.assign(item, {index})}
+                onBlur={this.itemOnBlur}
+              >
+              </Item>
+            )
         })
       }
       </div>
