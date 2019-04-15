@@ -1,10 +1,9 @@
 $item-check-bg: #2185FF;
 $item-border:#F4F5F7;
-$check-box-border: #B4D5FF;
+$check-box-border: #40ECFF;
 
 .todo-list-item {
-  padding: 0 15px;
-  padding-right: 20px;
+  padding: 0 20px 0 15px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -42,6 +41,8 @@ $check-box-border: #B4D5FF;
   }
 
   .item-content {
+    padding-right: 15px;
+    box-sizing: border-box;
     &.done {
       color: #DCDFE6;
     }

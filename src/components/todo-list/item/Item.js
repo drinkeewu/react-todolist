@@ -17,22 +17,26 @@ class Item extends Component {
   }
 
   handleDoubleClick() {
-    this.setState(state => ({
-      editing: !state.editing
-    }));
+    this.setState({
+      editing: true
+    });
   }
 
   handleOnBlur(e) {
     this.props.onBlur(e, this.props.data.index)
+    this.setState({
+      editing: false
+    })
   }
 
   handleInputChange(event) {
-    this.setState({ data: event.target.value })
+    this.props.onChange(event.target.value, this.state.index)
   }
 
   handleDelete() {
     this.props.onDelete(this.state.index)
   }
+
 
   
 
@@ -42,7 +46,7 @@ class Item extends Component {
     if (!editing) {
       return (
         <div className="todo-list-item" onDoubleClick={this.handleDoubleClick}>
-          <div className="item-check-dot" />
+          <label className="item-check-dot" />
           <div className="item-content">
             {this.props.children}
             { data && data.value }
@@ -61,8 +65,10 @@ class Item extends Component {
         <div className="item-content editing">
           <input 
             ref={input => this.input = input}
-            className="item-input" value={ data.value } 
+            className="item-input" 
+            value={ data.value } 
             onChange={this.handleInputChange} 
+            autoFocus={true}
             onBlur={this.handleOnBlur}/>
         </div>  
       </div>  

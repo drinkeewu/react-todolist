@@ -9,6 +9,7 @@ class List extends Component {
 
     this.state = {
       list: [],
+      inputValue: '',
 
       IsInputFocus: false
     };
@@ -16,21 +17,35 @@ class List extends Component {
     this.onItemBlur = this.onItemBlur.bind(this)
     this.onInputBlur = this.onInputBlur.bind(this)
     this.onInputFocus = this.onInputFocus.bind(this)
+    this.onInputChange = this.onInputChange.bind(this)
     this.onInputKeyUp = this.onInputKeyUp.bind(this)
     this.handleAddTodo = this.handleAddTodo.bind(this)
     this.onDelete = this.onDelete.bind(this)
     this.updateTodoList = this.updateTodoList.bind(this)
+    this.onItemChange = this.onItemChange.bind(this)
     
   }
 
   
   onItemBlur(e, index) {
     const { list } = this.state;
-    list[index].editing = false;
     this.setState({
       list
     })
   }
+  onItemChange(val, index) {
+    const { list } = this.state;
+    list[index].value = val;
+    store.dispatch({
+      type: 'UPDATE_TODO',
+      payload: {
+        list: list
+      }
+    })
+    this.updateTodoList()
+  }
+
+  
 
   onInputBlur(e) {
     
@@ -39,12 +54,19 @@ class List extends Component {
   onInputFocus(e) {
   }
 
+  onInputChange(e) {
+    this.setState({
+      inputValue: e.target.value
+    })
+  }
+
  
   onInputKeyUp(e) {
     if(e.keyCode !== 13 || !e.target.value){
       return false;
     }
-    this.handleAddTodo(e.target.value)
+    this.handleAddTodo(e.target.value.trim())
+    
   }
 
   onDelete(index) {
@@ -68,6 +90,9 @@ class List extends Component {
         complete: false
       }
     })
+    this.setState({
+      inputValue : ''
+    })
     this.updateTodoList()
   }
 
@@ -87,6 +112,8 @@ class List extends Component {
           onBlur={this.onInputBlur}
           onFocus={this.onInputFocus}
           onKeyUp={this.onInputKeyUp}
+          onChange={this.onInputChange}
+          value={this.state.inputValue}
         >
         </input>
         {
@@ -98,6 +125,7 @@ class List extends Component {
                   onBlur={this.onItemBlur}
                   index={index}
                   onDelete={this.onDelete}
+                  onChange={this.onItemChange}
                 >
                 </Item>
               )

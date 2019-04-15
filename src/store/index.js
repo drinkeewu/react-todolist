@@ -2,16 +2,7 @@ import { createStore } from 'redux'
 
 
 
-/** Action Creator */
-export const actions = {
-  int: () => {
-    return { type: 'INCREMENT' }
-  },
 
-  dec: () => {
-    return { type: 'DECREMENT' };
-  }
-}
 
 /** Reducer */
 const reducer = (state = {
@@ -25,6 +16,11 @@ const reducer = (state = {
       })
   
     case 'DELETE_TODO':
+      return Object.assign({}, state, {
+        todoList: payload.list
+      })
+    
+    case 'UPDATE_TODO':
       return Object.assign({}, state, {
         todoList: payload.list
       })
