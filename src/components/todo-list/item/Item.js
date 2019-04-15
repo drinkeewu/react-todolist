@@ -6,12 +6,14 @@ class Item extends Component {
     super(props);
 
     this.state = {
-      data: this.props.data
+      data: this.props.data,
+      index: this.props.index
     };
 
     this.handleDoubleClick = this.handleDoubleClick.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleOnBlur = this.handleOnBlur.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   handleDoubleClick() {
@@ -28,9 +30,11 @@ class Item extends Component {
     this.setState({ data: event.target.value })
   }
 
-  handleOnKeyUp(e) {
-    
+  handleDelete() {
+    this.props.onDelete(this.state.index)
   }
+
+  
 
   render() {
     const { data, editing } = this.state;
@@ -41,8 +45,13 @@ class Item extends Component {
           <div className="item-check-dot" />
           <div className="item-content">
             {this.props.children}
-            { data && data.name }
+            { data && data.value }
           </div>
+          <span 
+            className="todo-delete-btn"
+            onClick={this.handleDelete}
+          >×
+          </span>
         </div>
       );
     }
@@ -52,10 +61,9 @@ class Item extends Component {
         <div className="item-content editing">
           <input 
             ref={input => this.input = input}
-            className="item-input" value={ data.name } 
+            className="item-input" value={ data.value } 
             onChange={this.handleInputChange} 
-            onBlur={this.handleOnBlur}
-            onKeyUp={this.handleOnKeyUp}/>
+            onBlur={this.handleOnBlur}/>
         </div>  
       </div>  
     );

@@ -1,3 +1,3 @@
-import TodoList from './main/Main'
+import TodoList from './list/List'
  
 export default TodoList

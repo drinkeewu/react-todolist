@@ -1,4 +1,34 @@
 .todo-list{
-  padding-top: 66px;
+  position: relative;
+  width: 400px;
   background: #fff;
+  box-shadow: 0 6px 8px 0 rgba(57,71,108,.1);
+  .todo-input {
+    color: #303133;
+    padding-left: 60px;
+    display: block;
+    width: 100%;
+    font-size: 22px;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    font-weight: 200;
+    background: #fff;
+    box-shadow: 0 6px 8px 0 rgba(57,71,108,.1);
+    height: 60px;
+    line-height: 60px;
+
+    &::-webkit-input-placeholder { /* WebKit browsers */
+      color:    #eee;
+    }
+    &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color:    #eee;
+    }
+    &::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color:    #eee;
+    }
+    &:-ms-input-placeholder { /* Internet Explorer 10+ */
+        color:    #eee;
+    }
+  }
 }

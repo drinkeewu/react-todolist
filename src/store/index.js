@@ -15,14 +15,19 @@ export const actions = {
 
 /** Reducer */
 const reducer = (state = {
-  counter: 0
+  todoList: []
 }, action) => {
-  switch (action.type) {
-    case 'INCREMENT':
-      return { counter: state.counter + 1 }
+  const { type, payload } = action
+  switch (type) {
+    case 'ADD_TODO':
+      return Object.assign({}, state, {
+        todoList: [...state.todoList, payload]
+      })
   
-    case 'DECREMENT':
-      return { counter: state.counter - 1 }
+    case 'DELETE_TODO':
+      return Object.assign({}, state, {
+        todoList: payload.list
+      })
 
     default:
       return state

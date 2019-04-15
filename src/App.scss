@@ -1,0 +1,12 @@
+.App {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .todo-list-title {
+    color: #40ECFF;
+    font-style: italic;
+  }
+}
+
