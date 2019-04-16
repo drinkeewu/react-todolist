@@ -37,6 +37,11 @@ const reducer = (state, action) => {
       return { 
         todos: state.todos.filter(item => item.id !== payload.id)
       }
+
+    case actionTypes.CLEAR_COMPLETE: 
+      return  {
+        todos: state.todos.filter(item => !item.complete)
+      }
   
     default:
       return state

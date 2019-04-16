@@ -26,12 +26,12 @@ class Item extends Component {
   }
 
   handleOnBlur(e) {
+    this.setState({
+      editing: false
+    });
     const value = e.target.value;
     if(value) {
       this.handleInputChange(e);
-      this.setState({
-        editing: false
-      });
     } else {
       this.handleDelete()
     }

@@ -28,7 +28,15 @@ const actions = {
       type: actionTypes.DELETE_TODO,
       payload
     }
+  },
+
+  clearCompleted: (payload) => {
+    return {
+      type: actionTypes.CLEAR_COMPLETE,
+      payload
+    }
   }
+
 }
 
 export default actions;
