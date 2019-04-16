@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "./item.scss";
+import actions from '../../../store/actions'
+import { connect } from 'react-redux'
 
 class Item extends Component {
   constructor(props) {
@@ -14,6 +16,7 @@ class Item extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleOnBlur = this.handleOnBlur.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleToggleComplete = this.handleToggleComplete.bind(this);
   }
 
   handleDoubleClick() {
@@ -23,18 +26,25 @@ class Item extends Component {
   }
 
   handleOnBlur(e) {
-    this.props.onBlur(e, this.props.data.index)
+    this.handleInputChange(e)
     this.setState({
       editing: false
     })
   }
 
   handleInputChange(event) {
-    this.props.onChange(event.target.value, this.state.index)
+    this.props.updateTodo({
+      value: event.target.value,
+      id: this.props.data.id
+    })
   }
 
   handleDelete() {
-    this.props.onDelete(this.state.index)
+    this.props.onDelete(this.state.data)
+  }
+
+  handleToggleComplete() {
+    this.props.toggleComplete(this.props.data)
   }
 
 
@@ -45,8 +55,11 @@ class Item extends Component {
     // 非编辑状态
     if (!editing) {
       return (
-        <div className="todo-list-item" onDoubleClick={this.handleDoubleClick}>
-          <label className="item-check-dot" />
+        <div className={this.props.data.complete ? 'todo-list-item checked' : 'todo-list-item'}onDoubleClick={this.handleDoubleClick}>
+          <label 
+            className="item-check-dot"
+            onClick={this.handleToggleComplete}
+          />
           <div className="item-content">
             {this.props.children}
             { data && data.value }
@@ -76,4 +89,9 @@ class Item extends Component {
   }
 }
 
-export default Item;
+
+//注入 actions 导出注入了redux的组件
+export default connect(state => ({
+  ...state
+}), actions)(Item);
+

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Item from "../item/Item";
-import {store} from '../../../store' //redux
+import actions from '../../../store/actions'
+
+import { connect } from 'react-redux'
 
 import "./List.scss";
 class List extends Component {
@@ -21,28 +23,16 @@ class List extends Component {
     this.onInputKeyUp = this.onInputKeyUp.bind(this)
     this.handleAddTodo = this.handleAddTodo.bind(this)
     this.onDelete = this.onDelete.bind(this)
-    this.updateTodoList = this.updateTodoList.bind(this)
     this.onItemChange = this.onItemChange.bind(this)
     
   }
 
   
   onItemBlur(e, index) {
-    const { list } = this.state;
-    this.setState({
-      list
-    })
+    
   }
   onItemChange(val, index) {
-    const { list } = this.state;
-    list[index].value = val;
-    store.dispatch({
-      type: 'UPDATE_TODO',
-      payload: {
-        list: list
-      }
-    })
-    this.updateTodoList()
+  
   }
 
   
@@ -69,39 +59,23 @@ class List extends Component {
     
   }
 
-  onDelete(index) {
-    console.log(index)
-    let {list} = this.state; 
-    list.splice(index, 1)
-    store.dispatch({
-      type: 'DELETE_TODO',
-      payload: {
-        list
-      }
-    })
-   this.updateTodoList()
+  onDelete(todo) {
+    console.log(todo)
+    
   }
 
   handleAddTodo(value) {
-    store.dispatch({
-      type: 'ADD_TODO',
-      payload: {
-        value: value,
-        complete: false
-      }
+    this.props.addTodo({
+      value: value,
+      complete: false,
+      id: new Date().getTime()
     })
     this.setState({
       inputValue : ''
     })
-    this.updateTodoList()
   }
 
-  updateTodoList() {
-    console.log(store.getState())
-    this.setState({
-      list: store.getState().todoList
-    })
-  }
+
 
   render() {
     return (
@@ -117,7 +91,7 @@ class List extends Component {
         >
         </input>
         {
-          this.state.list.map((item, index) => {
+          this.props.todos.map((item, index) => {
             return (
                 <Item 
                   key={`item-${index}`}
@@ -136,4 +110,7 @@ class List extends Component {
   }
 }
 
-export default List;
+//注入 actions 导出注入了redux的组件
+export default connect(state => ({
+  ...state
+}), actions)(List);

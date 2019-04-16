@@ -1,36 +1,21 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
+import reducer from './reducers'
+import thunk from 'redux-thunk'
 
-
-
-
-
-/** Reducer */
-const reducer = (state = {
-  todoList: []
-}, action) => {
-  const { type, payload } = action
-  switch (type) {
-    case 'ADD_TODO':
-      return Object.assign({}, state, {
-        todoList: [...state.todoList, payload]
-      })
-  
-    case 'DELETE_TODO':
-      return Object.assign({}, state, {
-        todoList: payload.list
-      })
-    
-    case 'UPDATE_TODO':
-      return Object.assign({}, state, {
-        todoList: payload.list
-      })
-
-    default:
-      return state
-  }
+const state = {
+  todos: []
 }
 
-export const store = createStore(reducer);
+const store = createStore(
+  reducer,
+  state,
+  compose(
+    applyMiddleware(thunk),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  )
+);
+
+export default store;
 
 
 

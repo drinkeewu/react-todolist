@@ -1,4 +1,4 @@
-$item-check-bg: #2185FF;
+$item-check-bg: #40ECFF;
 $item-border:#F4F5F7;
 $check-box-border: #40ECFF;
 
@@ -14,7 +14,11 @@ $check-box-border: #40ECFF;
   font-size: 22px;
   font-weight: 200;
   &.checked {
-    background-color: #fff;
+    text-decoration: line-through;
+    color: #EBEEF5;
+    .item-check-dot{
+      background-color: $item-check-bg;
+    }
   }
   .todo-delete-btn {
     display: none;
@@ -35,9 +39,7 @@ $check-box-border: #40ECFF;
     border-radius: 100%;
     border: 2px solid $check-box-border;
 
-    &.checked {
-      background-color: $item-check-bg;
-    }
+    
   }
 
   .item-content {
