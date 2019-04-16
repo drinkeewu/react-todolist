@@ -1,5 +1,5 @@
 $item-check-bg: #40ECFF;
-$item-border:#F4F5F7;
+$item-border:#ededed;
 $check-box-border: #40ECFF;
 
 .todo-list-item {
@@ -13,9 +13,10 @@ $check-box-border: #40ECFF;
   height: 60px;
   font-size: 22px;
   font-weight: 200;
+  background: #fff;
   &.checked {
     text-decoration: line-through;
-    color: #EBEEF5;
+    color: #C0C4CC;
     .item-check-dot{
       background-color: $item-check-bg;
     }

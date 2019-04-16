@@ -1,0 +1,50 @@
+$color: #4F5E79;  
+$active-color:#40ECFF;
+.todo-list-footer {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: 0 15px;
+  box-sizing: border-box;
+  height: 40px;
+  line-height: 40px;
+  color: $color;
+  font-size: 14px;
+  background: #fff;
+  .todo-count {
+  }
+  .filter-tabs {
+    position: absolute;
+    left: 0;
+    right: 0;
+    button.filter-tab {
+      cursor: pointer;
+      border: none;
+      color: $color;
+      font-weight: 200;
+      outline: none;
+      font-size: 14px;
+      border: 1px solid #fff;
+      &:hover {
+        border: 1px solid #F2F6FC;
+      }
+      &.active {
+        border-color: #40ECFF;
+      }
+    }
+  }
+  button.clear-completed {
+    z-index: 1;
+    cursor: pointer;
+    outline: none;
+    font-weight: 200;
+    font-size: 14px;
+    border:none;
+    cursor: pointer;
+    color: $color;
+    background: transparent;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+}

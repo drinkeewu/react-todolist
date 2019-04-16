@@ -2,6 +2,8 @@ import actionTypes from '../actions/action-types'
 
 
 const reducer = (state, action) => {
+  const { payload } = action;
+
   switch (action.type) {
     case actionTypes.ADD_TODO:
       return {
@@ -22,7 +24,6 @@ const reducer = (state, action) => {
       }
 
     case actionTypes.UPDATE_TODO: 
-      const { payload } = action;
       return {
         todos: state.todos.map(item => {
           if(item.id === payload.id) {
@@ -30,6 +31,11 @@ const reducer = (state, action) => {
           }
           return item
         })
+      }
+
+    case actionTypes.DELETE_TODO: 
+      return { 
+        todos: state.todos.filter(item => item.id !== payload.id)
       }
   
     default:

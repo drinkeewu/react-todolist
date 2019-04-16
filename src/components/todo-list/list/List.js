@@ -1,18 +1,26 @@
 import React, { Component } from "react";
 import Item from "../item/Item";
-import actions from '../../../store/actions'
+import Footer from '../footer/Footer'
 
+import actions from '../../../store/actions'
 import { connect } from 'react-redux'
 
 import "./List.scss";
+
+const filters = {
+  all: todos => todos,
+  active: todos => todos.filter(todo => !todo.complete),
+  completed: todos => todos.filter(todo => todo.complete),
+}
+
 class List extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      list: [],
       inputValue: '',
 
+      activeTab: 'all',
       IsInputFocus: false
     };
 
@@ -24,6 +32,9 @@ class List extends Component {
     this.handleAddTodo = this.handleAddTodo.bind(this)
     this.onDelete = this.onDelete.bind(this)
     this.onItemChange = this.onItemChange.bind(this)
+    this.filteredTodos = this.filteredTodos.bind(this)
+    this.handleToggleTab = this.handleToggleTab.bind(this)
+
     
   }
 
@@ -75,9 +86,21 @@ class List extends Component {
     })
   }
 
+  filteredTodos() {
+    const { todos } = this.props
+    const { activeTab } = this.state
+    return filters[activeTab](todos)
+  }
 
+ 
+
+  handleToggleTab(val) {
+   console.log(val)
+  }
+  
 
   render() {
+    
     return (
       <div className="todo-list">
         <input 
@@ -104,6 +127,13 @@ class List extends Component {
                 </Item>
               )
           })
+        }
+        {
+          this.props.todos.length > 0 &&
+          <Footer 
+            activeTab={this.state.activeTab}
+            onTabChange={this.handleToggleTab}
+          />
         }
       </div>
     );

@@ -8,7 +8,6 @@ class Item extends Component {
     super(props);
 
     this.state = {
-      data: this.props.data,
       index: this.props.index
     };
 
@@ -17,6 +16,7 @@ class Item extends Component {
     this.handleOnBlur = this.handleOnBlur.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.handleToggleComplete = this.handleToggleComplete.bind(this);
+    this.handleOnKeyUp = this.handleOnKeyUp.bind(this);
   }
 
   handleDoubleClick() {
@@ -40,22 +40,32 @@ class Item extends Component {
   }
 
   handleDelete() {
-    this.props.onDelete(this.state.data)
+    this.props.deleteTodo(this.props.data)
   }
 
   handleToggleComplete() {
     this.props.toggleComplete(this.props.data)
   }
 
-
-  
+  handleOnKeyUp(e) {
+    if(e.keyCode !== 13) {
+      return false;
+    }
+    this.handleOnBlur(e);
+  }
 
   render() {
-    const { data, editing } = this.state;
+    const { editing } = this.state;
+    const { data } = this.props
     // 非编辑状态
     if (!editing) {
       return (
-        <div className={this.props.data.complete ? 'todo-list-item checked' : 'todo-list-item'}onDoubleClick={this.handleDoubleClick}>
+        <div 
+          className={
+            this.props.data.complete 
+              ? 'todo-list-item checked'
+              : 'todo-list-item'}
+            onDoubleClick={this.handleDoubleClick}>
           <label 
             className="item-check-dot"
             onClick={this.handleToggleComplete}
@@ -82,6 +92,7 @@ class Item extends Component {
             value={ data.value } 
             onChange={this.handleInputChange} 
             autoFocus={true}
+            onKeyUp={this.handleOnKeyUp}
             onBlur={this.handleOnBlur}/>
         </div>  
       </div>  

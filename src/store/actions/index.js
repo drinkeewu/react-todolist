@@ -21,6 +21,13 @@ const actions = {
       type: actionTypes.UPDATE_TODO,
       payload
     }
+  },
+
+  deleteTodo: (payload) => {
+    return {
+      type: actionTypes.DELETE_TODO,
+      payload
+    }
   }
 }
 
