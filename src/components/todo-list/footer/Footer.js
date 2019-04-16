@@ -1,5 +1,6 @@
 import React from "react";
 import "./footer.scss";
+
 function Footer(props) {
   const { leftCount } = props;
   return (
