@@ -100,7 +100,8 @@ class List extends Component {
   
 
   render() {
-    
+    const { todos } = this.props;
+    const leftCount = filters.active(todos).length
     return (
       <div className="todo-list">
         <input 
@@ -114,7 +115,7 @@ class List extends Component {
         >
         </input>
         {
-          this.props.todos.map((item, index) => {
+          todos.map((item, index) => {
             return (
                 <Item 
                   key={`item-${index}`}
@@ -133,6 +134,7 @@ class List extends Component {
           <Footer 
             activeTab={this.state.activeTab}
             onTabChange={this.handleToggleTab}
+            leftCount={leftCount}
           />
         }
       </div>
