@@ -1,0 +1,13 @@
+{
+  "main.css": "/react-todolist/build/static/css/main.38f53001.chunk.css",
+  "main.js": "/react-todolist/build/static/js/main.d5597f2c.chunk.js",
+  "main.js.map": "/react-todolist/build/static/js/main.d5597f2c.chunk.js.map",
+  "runtime~main.js": "/react-todolist/build/static/js/runtime~main.035a3c40.js",
+  "runtime~main.js.map": "/react-todolist/build/static/js/runtime~main.035a3c40.js.map",
+  "static/js/2.5520bfd9.chunk.js": "/react-todolist/build/static/js/2.5520bfd9.chunk.js",
+  "static/js/2.5520bfd9.chunk.js.map": "/react-todolist/build/static/js/2.5520bfd9.chunk.js.map",
+  "index.html": "/react-todolist/build/index.html",
+  "precache-manifest.b6e64204c9a2754045308604b9e89fae.js": "/react-todolist/build/precache-manifest.b6e64204c9a2754045308604b9e89fae.js",
+  "service-worker.js": "/react-todolist/build/service-worker.js",
+  "static/css/main.38f53001.chunk.css.map": "/react-todolist/build/static/css/main.38f53001.chunk.css.map"
+}
