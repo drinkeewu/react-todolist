@@ -4,15 +4,34 @@ import "./footer.scss";
 import actions from "../../../store/actions";
 import { connect } from "react-redux";
 
+const filters = [{
+  type: 'all',
+  text: 'All'
+}, {
+  type: 'active',
+  text: 'Active'
+}, {
+  type: 'completed',
+  text: 'Completed'
+}]
+
 class Footer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+    };
+
+  this.handleFilter = this.handleFilter.bind(this)
+
+  }
+
+  handleFilter(type) {
+    this.props.onTabChange(type)
   }
 
   render() {
-    const { leftCount, todos } = this.props;
+    const { leftCount, todos, activeFilter } = this.props;
     const completedCount = todos.filter(todo => todo.complete).length;
     return (
       <footer className="todo-list-footer">
@@ -20,9 +39,17 @@ class Footer extends Component {
           {leftCount ? leftCount : "No"} item left
         </span>
         <div className="filter-tabs">
-          <button className="filter-tab">All</button>
-          <button className="filter-tab">Active</button>
-          <button className="filter-tab">Completed</button>
+        {
+          filters.map(filter => (
+            <button 
+              className={filter.type === activeFilter ? 'filter-tab active': 'filter-tab'}
+              onClick={e => this.handleFilter(filter.type)}
+              key={`filter-${filter.type}`}
+            >
+              { filter.text }
+            </button>
+          ))
+        }
         </div>
         {
           completedCount > 0 &&

@@ -20,7 +20,7 @@ class List extends Component {
     this.state = {
       inputValue: '',
 
-      activeTab: 'all',
+      activeFilter: 'all',
       IsInputFocus: false
     };
 
@@ -30,7 +30,6 @@ class List extends Component {
     this.onInputChange = this.onInputChange.bind(this)
     this.onInputKeyUp = this.onInputKeyUp.bind(this)
     this.handleAddTodo = this.handleAddTodo.bind(this)
-    this.onDelete = this.onDelete.bind(this)
     this.onItemChange = this.onItemChange.bind(this)
     this.filteredTodos = this.filteredTodos.bind(this)
     this.handleToggleTab = this.handleToggleTab.bind(this)
@@ -70,10 +69,6 @@ class List extends Component {
     
   }
 
-  onDelete(todo) {
-    console.log(todo)
-    
-  }
 
   handleAddTodo(value) {
     this.props.addTodo({
@@ -88,19 +83,24 @@ class List extends Component {
 
   filteredTodos() {
     const { todos } = this.props
-    const { activeTab } = this.state
-    return filters[activeTab](todos)
+    const { activeFilter } = this.state
+    return filters[activeFilter](todos) || []
   }
 
  
 
-  handleToggleTab(val) {
-   console.log(val)
+  handleToggleTab(type) {
+    this.setState({
+      activeFilter: type
+    })
+    this.filteredTodos()
   }
+
+  
   
 
   render() {
-    const { todos } = this.props;
+    const todos = this.filteredTodos() || []
     const leftCount = filters.active(todos).length
     return (
       <div className="todo-list">
@@ -122,7 +122,6 @@ class List extends Component {
                   data={Object.assign(item, {index})}
                   onBlur={this.onItemBlur}
                   index={index}
-                  onDelete={this.onDelete}
                   onChange={this.onItemChange}
                 >
                 </Item>
@@ -132,9 +131,9 @@ class List extends Component {
         {
           this.props.todos.length > 0 &&
           <Footer 
-            activeTab={this.state.activeTab}
-            onTabChange={this.handleToggleTab}
+            activeFilter={this.state.activeFilter}
             leftCount={leftCount}
+            onTabChange={this.handleToggleTab}
           />
         }
       </div>
