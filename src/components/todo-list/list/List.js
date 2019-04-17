@@ -100,8 +100,7 @@ class List extends Component {
   
 
   render() {
-    const filteredTodos = this.filteredTodos() || [];
-    const { todos } = this.props;
+    const todos = this.filteredTodos() || []
     const leftCount = filters.active(todos).length
     return (
       <div className="todo-list">
@@ -116,7 +115,7 @@ class List extends Component {
         >
         </input>
         {
-          filteredTodos.map((item, index) => {
+          todos.map((item, index) => {
             return (
                 <Item 
                   key={`item-${index}`}
