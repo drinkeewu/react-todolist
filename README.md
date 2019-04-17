@@ -1,6 +1,6 @@
 # React TodoList
 
-[Demo Link](https://drinkeewu.github.io/react-todolist/build/index.html)
+预览地址: [Demo Link](https://drinkeewu.github.io/react-todolist/build/index.html)
 
 通过编写一个todolist组件熟悉react的各项特性
 
