@@ -24,22 +24,24 @@
     &::-webkit-input-placeholder { /* WebKit browsers */
       color:    #eee;
       font-style: italic;
+      font-weight: bold;
 
     }
     &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-        color:    #eee;
+      color:    #eee;
       font-style: italic;
+      font-weight: bold;
 
     }
     &::-moz-placeholder { /* Mozilla Firefox 19+ */
-        color:    #eee;
+      color:    #eee;
       font-style: italic;
-
+      font-weight: bold;
     }
     &:-ms-input-placeholder { /* Internet Explorer 10+ */
-        color:    #eee;
+      color:    #eee;
       font-style: italic;
-
+      font-weight: bold;
     }
   }
 }
