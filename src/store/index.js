@@ -1,9 +1,11 @@
 import { createStore, applyMiddleware, compose } from 'redux'
+import { storage } from '../utils'
 import reducer from './reducers'
 import thunk from 'redux-thunk'
 
+
 const state = {
-  todos: []
+  todos: storage.getJSON('react_todos') || []
 }
 
 const store = createStore(
