@@ -21,38 +21,22 @@ class List extends Component {
       inputValue: '',
 
       activeFilter: 'all',
-      IsInputFocus: false
+      IsInputFocus: false,
+      isCheckAll: false,
     };
 
-    this.onItemBlur = this.onItemBlur.bind(this)
-    this.onInputBlur = this.onInputBlur.bind(this)
-    this.onInputFocus = this.onInputFocus.bind(this)
     this.onInputChange = this.onInputChange.bind(this)
     this.onInputKeyUp = this.onInputKeyUp.bind(this)
     this.handleAddTodo = this.handleAddTodo.bind(this)
-    this.onItemChange = this.onItemChange.bind(this)
     this.filteredTodos = this.filteredTodos.bind(this)
     this.handleToggleTab = this.handleToggleTab.bind(this)
-
+    this.toggleAllTodos = this.toggleAllTodos.bind(this)
+    this.toggleCheckAll = this.toggleCheckAll.bind(this)
+    this.onClearComplete = this.onClearComplete.bind(this)
     
   }
 
-  
-  onItemBlur(e, index) {
-    
-  }
-  onItemChange(val, index) {
-  
-  }
 
-  
-
-  onInputBlur(e) {
-    
-  }
-
-  onInputFocus(e) {
-  }
 
   onInputChange(e) {
     this.setState({
@@ -87,6 +71,21 @@ class List extends Component {
     return filters[activeFilter](todos) || []
   }
 
+  toggleAllTodos() {
+    this.props.toggleAllTodos({
+      isCheckAll: this.state.isCheckAll
+    })
+    this.toggleCheckAll()
+  }
+
+  toggleCheckAll() {
+    if(this.props.todos.length === 0){
+      return;
+    }
+    this.setState(state => ({
+      isCheckAll: !state.isCheckAll
+    }))
+  }
  
 
   handleToggleTab(type) {
@@ -94,6 +93,12 @@ class List extends Component {
       activeFilter: type
     })
     this.filteredTodos()
+  }
+
+  onClearComplete() {
+    this.setState({
+      isCheckAll: false
+    })
   }
 
   
@@ -105,11 +110,17 @@ class List extends Component {
     const leftCount = filters.active(todos).length
     return (
       <div className="todo-list">
-        <input 
+        <i
+          onClick={this.toggleAllTodos}
+          className={`iconfont icon-quanxuan ${
+            this.state.isCheckAll 
+             ? 'active'
+             : ''
+          }`}
+        />
+        <input
           className="todo-input"
           placeholder="What need to do ?"
-          onBlur={this.onInputBlur}
-          onFocus={this.onInputFocus}
           onKeyUp={this.onInputKeyUp}
           onChange={this.onInputChange}
           value={this.state.inputValue}
@@ -121,9 +132,7 @@ class List extends Component {
                 <Item 
                   key={`item-${index}`}
                   data={Object.assign(item, {index})}
-                  onBlur={this.onItemBlur}
                   index={index}
-                  onChange={this.onItemChange}
                 >
                 </Item>
               )
@@ -135,6 +144,7 @@ class List extends Component {
             activeFilter={this.state.activeFilter}
             leftCount={leftCount}
             onTabChange={this.handleToggleTab}
+            onClearComplete={this.onClearComplete}
           />
         }
       </div>

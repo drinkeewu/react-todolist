@@ -1,9 +1,22 @@
+@import url('//at.alicdn.com/t/font_1154724_5a2rd4q6wva.css');
 .todo-list{
   position: relative;
   width: 500px;
   background: #fff;
   box-shadow: 0 6px 8px 0 rgba(57,71,108,.1);
   font-weight: 200;
+  .icon-quanxuan {
+    font-size: 30px;
+    position: absolute;
+    left: 15px;
+    color: #d6d6d6;
+    top: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    &.active{
+      color: #40ECFF;
+    }
+  }
   .todo-input {
     color: #303133;
     padding-left: 60px;

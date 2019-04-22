@@ -57,6 +57,17 @@ const reducer = (state, action) => {
       return  {
         todos
       }
+    
+      case actionTypes.TOGGLE_ALL:
+        const { isCheckAll } = payload;
+        todos = state.todos.map(item => {
+          return Object.assign({}, item, {
+            complete: !isCheckAll
+          })
+        })
+        return {
+          todos
+        }
   
     default:
       return state

@@ -23,11 +23,17 @@ class Footer extends Component {
     };
 
   this.handleFilter = this.handleFilter.bind(this)
+  this.handleClearComplete = this.handleClearComplete.bind(this)
 
   }
 
   handleFilter(type) {
     this.props.onTabChange(type)
+  }
+
+  handleClearComplete() {
+    this.props.clearCompleted();
+    this.props.onClearComplete();
   }
 
   render() {
@@ -55,7 +61,7 @@ class Footer extends Component {
           completedCount > 0 &&
           <button
            className="clear-completed"
-           onClick={this.props.clearCompleted}
+           onClick={this.handleClearComplete}
           >
             Clear Completed
           </button>

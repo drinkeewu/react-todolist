@@ -35,6 +35,13 @@ const actions = {
       type: actionTypes.CLEAR_COMPLETE,
       payload
     }
+  },
+
+  toggleAllTodos: (payload) => {
+    return {
+      type: actionTypes.TOGGLE_ALL,
+      payload
+    }
   }
 
 }
