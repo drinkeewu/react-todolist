@@ -52,6 +52,7 @@ $check-box-border: #40ECFF;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-align: left;
     &.done {
       color: #DCDFE6;
     }
