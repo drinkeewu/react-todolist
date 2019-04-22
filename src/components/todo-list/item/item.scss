@@ -14,6 +14,7 @@ $check-box-border: #40ECFF;
   font-size: 22px;
   font-weight: 200;
   background: #fff;
+
   &.checked {
     text-decoration: line-through;
     color: #C0C4CC;
@@ -33,6 +34,7 @@ $check-box-border: #40ECFF;
     }
   }
   .item-check-dot {
+    flex-shrink: 0;
     cursor: pointer;
     margin-right: 15px;
     width: 24px;
@@ -44,8 +46,12 @@ $check-box-border: #40ECFF;
   }
 
   .item-content {
+    width: 100%;
     padding-right: 15px;
     box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     &.done {
       color: #DCDFE6;
     }
@@ -54,11 +60,16 @@ $check-box-border: #40ECFF;
       padding-left: 43px;
       //输入框
       .item-input {
+        display: block;
         background: #fff;
         border: none;
         font-size: 22px;
         font-weight: 200; 
         outline: none;
+        width: 100%;
+        border: 1px solid #eee;
+        box-sizing: border-box;
+        padding: 0 10px;
       }
     }
   }
