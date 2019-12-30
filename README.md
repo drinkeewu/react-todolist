@@ -21,3 +21,9 @@
 ### v1.0.5
 - 增加全选功能
 
+
+
+运行界面：
+
+![image](https://github.com/drinkeewu/react-todolist/raw/master/img/screenshot.png)
+
