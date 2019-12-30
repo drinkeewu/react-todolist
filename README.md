@@ -3,13 +3,6 @@
 预览地址: [Demo Link](https://drinkeewu.github.io/react-todolist/build/index.html)
 
 
-- props
-- state
-- 状态提升
-- redux状态共享
----
-
-
 ## 运行项目
 
 安装依赖
